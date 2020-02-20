@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-function DevForm({ onSubmit }) {
+import './styles.css'
+
+function DevForm({ onSubmit, dev, usernameDisabled = false, cancelButtonAction }) {
+    const isMounted = useRef(true);
     const [loading, setLoading] = useState(false);
     const [github_username, setGithubUsername] = useState('');
     const [techs, setTechs] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
+
+    useEffect(() => {
+        if (dev) {
+            setGithubUsername(dev.github_username);
+            setTechs(dev.techs.join(", "));
+            setLatitude(dev.location.coordinates[1]);
+            setLongitude(dev.location.coordinates[0]);
+        }
+        return () => {
+            isMounted.current = false;
+        }
+    }, [dev]);
 
     function myLocation() {
         setLoading(true);
@@ -28,6 +43,7 @@ function DevForm({ onSubmit }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
         setLoading(true);
         await onSubmit({
             github_username,
@@ -35,8 +51,10 @@ function DevForm({ onSubmit }) {
             latitude,
             longitude
         });
-        setLoading(false);
-        clearFields();
+        if (isMounted.current) {
+            setLoading(false);
+            clearFields();
+        }
     }
 
     function clearFields() {
@@ -48,7 +66,7 @@ function DevForm({ onSubmit }) {
         <form onSubmit={handleSubmit}>
             <div className="input-block">
                 <label htmlFor="github_username">Usuário do Github</label>
-                <input name="github_username" id="github_username" required value={github_username} onChange={e => setGithubUsername(e.target.value)} />
+                <input name="github_username" id="github_username" required value={github_username} onChange={e => setGithubUsername(e.target.value)} disabled={usernameDisabled} />
             </div>
 
             <div className="input-block">
@@ -70,7 +88,8 @@ function DevForm({ onSubmit }) {
                 <button type="button" onClick={myLocation} disabled={loading}>{loading ? "Aguarde..." : "Minha localização"}</button>
             </div>
 
-            <button type="Submit" disabled={loading}>{loading ? "Aguarde..." : "Salvar"}</button>
+            <button type="Submit" disabled={loading}>{loading ? "Aguarde..." : dev ? "Editar" : "Salvar"}</button>
+            <button type="button" className="cancel-button" disabled={loading} onClick={cancelButtonAction} hidden={!cancelButtonAction}>{loading ? "Aguarde..." : "Cancelar"}</button>
         </form>
     );
 }

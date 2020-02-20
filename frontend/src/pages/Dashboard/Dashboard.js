@@ -8,7 +8,7 @@ import './main.css';
 import DevItem from '../../components/DevItem';
 import DevForm from '../../components/DevForm';
 
-function Dashboard() {
+function Dashboard({ history }) {
   const [devs, setDevs] = useState([]);
 
   useEffect(() => {
@@ -22,8 +22,9 @@ function Dashboard() {
   async function handlerAddDev(data) {
     try {
       const response = await api.post('/devs', data);
-
-      setDevs([...devs, response.data]);
+      if (response && response.status === 200) {
+        setDevs([...devs, response.data]);
+      }
     } catch ({ response }) {
       if (response.data.error) {
         alert(response.data.messages.join("\n"));
@@ -41,7 +42,7 @@ function Dashboard() {
       <main>
         <ul>
           {devs.map(dev => (
-            <DevItem key={dev._id} dev={dev} />
+            <DevItem key={dev._id} dev={dev} history={history} />
           ))}
         </ul>
       </main>

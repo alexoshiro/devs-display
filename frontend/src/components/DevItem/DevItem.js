@@ -1,8 +1,11 @@
 import React from 'react';
 import './styles.css';
 
-function DevItem({ dev }) {
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
+
+function DevItem({ history, dev }) {
     return (
         <li className="dev-item">
             <header>
@@ -10,6 +13,10 @@ function DevItem({ dev }) {
                 <div className="user-info">
                     <strong>{dev.name}</strong>
                     <span>{dev.techs.join(', ')}</span>
+                </div>
+                <div className="actions">
+                    <EditIcon fontSize="small" onClick={() => history.push(`/editar/${dev.github_username}`)}/>
+                    <DeleteIcon fontSize="small" className="delete-icon" />
                 </div>
             </header>
             <p>{dev.bio}</p>

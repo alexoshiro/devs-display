@@ -44,9 +44,12 @@ module.exports = {
         techs: techsArray,
         location
       });
+      return res.json(dev);
+    } else {
+      return res.status(422).json({ error: true, messages: ["Usuário já cadastado."] });
     }
 
-    return res.json(dev);
+
   },
 
   async update(req, res) {
@@ -93,6 +96,15 @@ module.exports = {
     await Dev.deleteOne({ github_username: username });
 
     return res.status(204).json();
+  },
 
+  async show(req, res) {
+    const { github_username } = req.params;
+    const dev = await Dev.findOne({ github_username });
+    if (dev) {
+      return res.json(dev);
+    } else {
+      return res.json({ error: true, messages: ["Usuário não encontrado."] });
+    }
   }
 }
