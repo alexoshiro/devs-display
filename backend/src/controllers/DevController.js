@@ -27,7 +27,8 @@ module.exports = {
     if (!dev) {
       const apiResponse = await axios.get(`htttps://api.github.com/users/${github_username}`);
 
-      const { name = login, avatar_url, bio } = apiResponse.data;
+      let { name = login, avatar_url, bio } = apiResponse.data;
+      name = !name ? apiResponse.data.login : name;
 
       const techsArray = parseStringAsArray(techs);
 

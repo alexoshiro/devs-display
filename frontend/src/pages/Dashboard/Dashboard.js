@@ -30,7 +30,20 @@ function Dashboard({ history }) {
         alert(response.data.messages.join("\n"));
       }
     }
+  }
 
+  async function handlerDeleteDev(username) {
+    try {
+      const response = await api.delete(`/devs/${username}`);
+      if (response && response.status === 204) {
+        const filteredDevs = devs.filter(dev => dev.github_username !== username);
+        setDevs(filteredDevs);
+      }
+    } catch ({ response }) {
+      if (response.data.error) {
+        alert(response.data.messages.join("\n"));
+      }
+    }
   }
 
   return (
@@ -42,7 +55,7 @@ function Dashboard({ history }) {
       <main>
         <ul>
           {devs.map(dev => (
-            <DevItem key={dev._id} dev={dev} history={history} />
+            <DevItem key={dev._id} dev={dev} history={history} removeItemAction={handlerDeleteDev} />
           ))}
         </ul>
       </main>

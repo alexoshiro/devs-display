@@ -1,5 +1,7 @@
 
 li.dev-item {
+    display: flex;
+    flex-flow: column;
     background: #fff;
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
     border-radius: 2px;
@@ -57,4 +59,8 @@ li.dev-item a:hover {
 
 .delete-icon {
     margin-left: 10px;
+}
+
+.dev-item a{
+    margin-top: auto;
 }
