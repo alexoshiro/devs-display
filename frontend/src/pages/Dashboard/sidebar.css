@@ -65,3 +65,20 @@ aside form button[type=submit] {
 aside form button[type=submit]:hover {
     background-color: #6931ca;
 }
+
+aside form .input-block button{
+    width: 100%;
+    border: 0;
+    margin-top: 15px;
+    background-color: #7d40e7;
+    border-radius: 2px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.5s;
+}
+
+aside form .input-block button:hover {
+    background-color: #6931ca;
+}

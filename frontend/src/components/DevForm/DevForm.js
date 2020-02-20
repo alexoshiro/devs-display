@@ -1,38 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 function DevForm({ onSubmit }) {
+    const [loading, setLoading] = useState(false);
     const [github_username, setGithubUsername] = useState('');
     const [techs, setTechs] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
 
-    useEffect(() => {
+    function myLocation() {
+        setLoading(true);
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setLatitude(latitude);
                 setLongitude(longitude);
+                setLoading(false);
             },
             (err) => {
-                console.log(err);
+                alert(err.message);
+                setLoading(false);
             },
             {
                 timeout: 30000
             }
         );
-
-    }, []);
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
-
+        setLoading(true);
         await onSubmit({
             github_username,
             techs,
             latitude,
             longitude
         });
-        
+        setLoading(false);
         clearFields();
     }
 
@@ -63,8 +66,11 @@ function DevForm({ onSubmit }) {
                     <input type="number" name="longitude" id="longitude" required value={longitude} onChange={e => setLongitude(e.target.value)} />
                 </div>
             </div>
+            <div className="input-block">
+                <button type="button" onClick={myLocation} disabled={loading}>{loading ? "Aguarde..." : "Minha localização"}</button>
+            </div>
 
-            <button type="Submit">Salvar</button>
+            <button type="Submit" disabled={loading}>{loading ? "Aguarde..." : "Salvar"}</button>
         </form>
     );
 }

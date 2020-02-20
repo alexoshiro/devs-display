@@ -20,9 +20,16 @@ function Dashboard() {
   }, []);
 
   async function handlerAddDev(data) {
-    const response = await api.post('/devs',data);
+    try {
+      const response = await api.post('/devs', data);
 
-    setDevs([...devs, response.data]);
+      setDevs([...devs, response.data]);
+    } catch ({ response }) {
+      if (response.data.error) {
+        alert(response.data.messages.join("\n"));
+      }
+    }
+
   }
 
   return (
