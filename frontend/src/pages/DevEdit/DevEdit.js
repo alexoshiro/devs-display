@@ -42,7 +42,7 @@ function DevEdit({ history, match }) {
 
   return (
     <div className="container">
-      <div className="header">Editar</div>
+      {dev ? <img src={dev.avatar_url} alt={dev.name} /> : <div className="header">Editar</div>}
       <div>
         <DevForm onSubmit={handlerUpdateDev} dev={dev} usernameDisabled={true} cancelButtonAction={redirectToHome} />
       </div>
