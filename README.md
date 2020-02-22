@@ -6,15 +6,15 @@ Projeto **Devs Display ** desenvolvido durante a Omnistack da Rocketseat
 
 Web Dashboard
 
-![dashboard](C:\Hobby\devs-display\.github\assets\dashboard.png)
+![dashboard](.github\assets\dashboard.png)
 
 Web Edição de cadastro
 
-![edit-page](C:\Hobby\devs-display\.github\assets\edit-page.png)
+![edit-page](.github\assets\edit-page.png)
 
 App mobile
 
-![app](C:\Hobby\devs-display\.github\assets\app.png)
+![app](.github\assets\app.png)
 
 ## Pré-requisitos
 
