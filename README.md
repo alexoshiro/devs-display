@@ -6,15 +6,15 @@ Projeto **Devs Display** desenvolvido durante a Omnistack da Rocketseat
 
 Web Dashboard
 
-![dashboard](.github\assets\dashboard.png)
+![dashboard](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/dashboard.png)
 
 Web Edição de cadastro
 
-![edit-page](.github\assets\edit-page.png)
+![edit-page](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/edit-page.png)
 
 App mobile
 
-![app](.github\assets\app.png)
+![app](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/app.png)
 
 ## Pré-requisitos
 
