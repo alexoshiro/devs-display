@@ -1,6 +1,6 @@
 # Dev Display
 
-Projeto **Devs Display ** desenvolvido durante a Omnistack da Rocketseat
+Projeto **Devs Display** desenvolvido durante a Omnistack da Rocketseat
 
 ------
 
@@ -108,4 +108,4 @@ Run on iOS simulator - para emulador iOS
 
 Instale o aplicativo Expo em seu smartphone.
 
-No aplicativo na categoria Tools, toque em Scan QR Code, e faça o scann do QR Code exibido na página do Expo developer tools.
+No aplicativo na categoria Tools, toque em Scan QR Code, e faça o scan do QR Code exibido na página do Expo developer tools.
