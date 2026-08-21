@@ -1,4 +1,4 @@
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 
 const storeSchema = Joi.object().keys({
   github_username: Joi.string().alphanum().required()

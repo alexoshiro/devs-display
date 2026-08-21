@@ -26,7 +26,7 @@ module.exports = {
     let dev = await Dev.findOne({ github_username });
 
     if (!dev) {
-      const apiResponse = await axios.get(`htttps://api.github.com/users/${github_username}`);
+      const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
 
       let { name = login, avatar_url, bio } = apiResponse.data;
       name = !name ? apiResponse.data.login : name;

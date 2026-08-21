@@ -6,7 +6,12 @@ let io;
 const connections = [];
 
 exports.setupWebsocket = (server) => {
-    io = socketio(server);
+    io = socketio(server, {
+        cors: {
+            origin: "*",
+            methods: ["GET", "POST"]
+        }
+    });
 
     io.on('connection', socket => {
         const { latitude, longitude, techs } = socket.handshake.query;
