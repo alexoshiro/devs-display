@@ -1,111 +1,121 @@
 # Dev Display
 
-Projeto **Devs Display** desenvolvido durante a Omnistack da Rocketseat
+Aplicação **Dev Display** desenvolvida para cadastro, busca por geolocalização e visualização em tempo real de desenvolvedores através de tecnologias modernas.
 
-------
+---
 
-Web Dashboard
+## 📸 Demonstração
 
-![dashboard](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/dashboard.png)
+| Web Dashboard | Web Edição de Cadastro | App Mobile |
+| :---: | :---: | :---: |
+| ![dashboard](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/dashboard.png) | ![edit-page](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/edit-page.png) | ![app](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/app.png) |
 
-Web Edição de cadastro
+---
 
-![edit-page](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/edit-page.png)
+## 🚀 Tecnologias Utilizadas
 
-App mobile
+- **Monorepo / Gerenciador de Pacotes**: [pnpm Workspace](https://pnpm.io/)
+- **Backend**: Node.js, Express, MongoDB (Mongoose 8), Socket.io 4, Joi
+- **Frontend**: React 18, Vite, React Router DOM 6, Material UI (MUI v5), Axios
+- **Mobile**: React Native, Expo SDK 51, React Navigation 6, React Native Maps, Socket.io Client 4
 
-![app](https://raw.githubusercontent.com/alexoshiro/devs-display/master/.github/assets/app.png)
+---
 
-## Pré-requisitos
+## 📋 Pré-requisitos
 
-- Node.js
-- Yarn
-- Expo e expo-cli
-- MongoDB
+- [Node.js](https://nodejs.org/) (versão 20 ou superior)
+- [pnpm](https://pnpm.io/installation) (`npm install -g pnpm`)
+- [MongoDB](https://www.mongodb.com/) (Instância local ou cluster no [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
+- Aplicativo **Expo Go** no smartphone (ou emulador Android/iOS configurado)
 
+---
 
+## ⚙️ Instalação e Configuração
 
-## Instalação
+Na raiz do repositório, instale todas as dependências do workspace (backend, frontend e mobile) com um único comando:
 
-### Backend(API)
-
-A aplicação backend utiliza obrigatoriamente 1 variável de ambiente para ser executada, MONGO_URI, essa variável é a string de conexão com o MongoDB.
-
-Para configurar a variável de ambiente localmente crie um arquivo chamado .env na diretório raiz do projeto backend: devs-display/backend/.env
-
-Dentro desse arquivo coloque a variável com seu valor, exemplo:
-
-```
-MONGO_URI=mongodb+srv://example:example@cluster0-meloa.mongodb.net/devdisplay?retryWrites=true&w=majority
-```
-
-
-
-Agora para executar o projeto, vá para o diretório raiz do projeto backend: devs-display/backend/ e execute os seguintes comandos:
-
-```
-yarn install
-yarn dev
+```bash
+pnpm install
 ```
 
-O projeto será iniciado na porta 3333.
+---
 
-### Frontend(UI)
+### 1. Backend (API)
 
-Para executar o projeto, vá para o diretório raiz do projeto frontend: devs-display/frontend/ e execute os seguintes comandos:
+A API necessita da variável de ambiente `MONGO_URI` com a string de conexão do MongoDB.
 
-```
-yarn install
-yarn start
-```
+1. Crie o arquivo `.env` no diretório `backend/`:
+   ```bash
+   # backend/.env
+   MONGO_URI=mongodb+srv://<usuario>:<senha>@cluster0.mongodb.net/devdisplay?retryWrites=true&w=majority
+   ```
 
-O projeto será iniciado na porta 3000.
+2. Execute o backend:
+   ```bash
+   # A partir da raiz do projeto:
+   pnpm --filter backend run dev
 
-Caso o navegador não seja aberto automaticamente, é possível acessar a aplicação em seu navegador utilizando a url: **localhost:3000**
+   # Ou dentro da pasta backend/:
+   cd backend
+   pnpm run dev
+   ```
 
+O servidor iniciará em `http://localhost:3333`.
 
+---
 
-### Mobile(APP)
+### 2. Frontend (Web)
 
-A aplicação mobile utiliza obrigatoriamente 1 variável de ambiente para ser executada, API_URL, essa variável indica a URL na qual o projeto backend está exposto.
+O frontend foi construído com **Vite + React 18**.
 
-Para configurar a variável de ambiente localmente crie um arquivo chamado .env na diretório raiz do projeto backend: devs-display/mobile/.env
+1. Execute a aplicação web:
+   ```bash
+   # A partir da raiz do projeto:
+   pnpm --filter frontend run dev
 
-Dentro desse arquivo coloque a variável com seu valor, exemplo:
+   # Ou dentro da pasta frontend/:
+   cd frontend
+   pnpm run dev
+   ```
 
-```
-API_URL=http://10.0.2.2:3333
-```
+2. Acesse a aplicação no navegador em `http://localhost:3000`.
 
-
-
-Agora para executar o projeto, vá para o diretório raiz do projeto backend: devs-display/mobile/ e execute os seguintes comandos:
-
-```
-yarn install
-yarn start
-```
-
-Será aberta a página do Expo developer tools, **localhost:19002**
-
-Nessa página você pode escolher entre executar o app em um emulador ou no seu smartphone via Lan.
-
-#### Via emulador
-
-Execute seu emulador, na página do Expo developer tools, clique em:
-
-```
-Run on Android device/emulator - para emulador Android
-
-ou
-
-Run on iOS simulator - para emulador iOS
+Para gerar a build de produção:
+```bash
+pnpm --filter frontend run build
 ```
 
+---
 
+### 3. Mobile (App)
 
-#### Via Lan
+O aplicativo mobile utiliza o **Expo SDK 51**.
 
-Instale o aplicativo Expo em seu smartphone.
+1. Configure a variável `API_URL` criando um arquivo `.env` na pasta `mobile/`:
+   ```bash
+   # mobile/.env
+   # Para emulador Android use: http://10.0.2.2:3333
+   # Para dispositivo físico na mesma rede Wi-Fi, use o IP da sua máquina (ex: http://192.168.1.10:3333)
+   API_URL=http://10.0.2.2:3333
+   ```
 
-No aplicativo na categoria Tools, toque em Scan QR Code, e faça o scan do QR Code exibido na página do Expo developer tools.
+2. Execute o app mobile:
+   ```bash
+   # A partir da raiz do projeto:
+   pnpm --filter mobile run start
+
+   # Ou dentro da pasta mobile/:
+   cd mobile
+   pnpm run start
+   ```
+
+3. No terminal exibido:
+   - Pressione **`a`** para abrir no emulador Android.
+   - Pressione **`i`** para abrir no simulador iOS.
+   - Ou escaneie o **QR Code** pelo app **Expo Go** no seu smartphone.
+
+---
+
+## 📜 Licença
+
+Esse projeto está sob a licença MIT.
